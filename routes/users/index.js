@@ -1,13 +1,17 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { validarCampos } = require('../../middlewares/validar-campos');
+const { validarCampos, validateRol, validateJwt } = require('../../middlewares');
 const { roleValid, emailExiste, getUserForId } = require('../../helpers/db-validators')
 const { userGet, userPost, userPut, userDelete } = require('../../controllers/users');
 
 
 const router = Router();
 
-router.get('/',  userGet);
+router.get('/', [
+    validateJwt,
+    //validarRolAdmin,
+    validateRol('ADMIN_ROLE', 'USER_ROLE')
+],  userGet);
 router.post('/',  [
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('password', 'La contraseña es obligatoria y debe ser mas de 6 letras').not().isEmpty().isLength({ min: 6}),
