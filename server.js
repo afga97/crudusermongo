@@ -10,8 +10,10 @@ db();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use('/', express.static(__dirname + '/public'));
 
 routes(app);
+
 
 app.listen(PORT, () => {
     console.log(`Aplication runserver in http://localhost:${PORT}`);
