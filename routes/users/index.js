@@ -8,9 +8,9 @@ const { userGet, userPost, userPut, userDelete } = require('../../controllers/us
 const router = Router();
 
 router.get('/', [
-    validateJwt,
-    //validarRolAdmin,
-    validateRol('ADMIN_ROLE', 'USER_ROLE')
+    // validateJwt,
+    // validarRolAdmin,
+    // validateRol('ADMIN_ROLE', 'USER_ROLE')
 ],  userGet);
 router.post('/',  [
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
