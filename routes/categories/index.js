@@ -43,8 +43,8 @@ updateCategorie)
 // Borrar logico de categoria - ADMiN
 router.delete('/:id', [
     check('id', 'No es un ID válido').isMongoId(),
-    validateRol('ADMIN_ROL'),
-    validarCampos
+    //validateRol('ADMIN_ROL'),
+    //validarCampos
 ], deleteCategorie)
 
 module.exports = router

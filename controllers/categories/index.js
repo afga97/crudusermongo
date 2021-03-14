@@ -4,7 +4,7 @@ const { CategorieModel } = require('../../models')
 const getCategories = async (req = request, res = response) => {
     const query = { estado: true };
     const { limit = 5, skip = 0 } = req.query;
-    //prueba
+    
     const [total, categories] = await Promise.all([
         CategorieModel.countDocuments(query),
         CategorieModel.find(query).populate('usuario', 'nombre')
@@ -61,7 +61,7 @@ const createCategories = async (req = request, res = response) => {
         res.status(201).json(categoria);
     } catch (error) {
         console.log(error)
-        return res.status(500).json({
+        return res.status(400).json({
             message: 'Ocurrio un error al guardar'
         })
     }
@@ -70,20 +70,18 @@ const createCategories = async (req = request, res = response) => {
 const updateCategorie = async (req = request, res = response) => {
     const { id } = req.params;
     const { name, status: estado } = req.body;
-    let categorie = {};
     try {
-        categorie = await CategorieModel.findByIdAndUpdate({ _id: id }, { name, estado })
+        const categorie = await CategorieModel.findByIdAndUpdate({ _id: id }, { name, estado })
+        res.status(201).json({
+            message: 'Actualizado correctamente',
+            categorie
+        })
     } catch (error) {
         console.log(error)
-        return res.status(500).json({
+        return res.status(400).json({
             message: 'Ocurrio un error al actualizar la categoria'
         })
     }
-
-    res.status(201).json({
-        message: 'Actualizado correctamente',
-        categorie
-    })
 }
 
 const deleteCategorie = async (req = request, res = response ) => {
