@@ -1,10 +1,10 @@
-const UsuarioModel = require('./usuario');
+const usuarioModel = require('./usuario');
 const RoleModel = require('./role');
 const CategorieModel = require('./categorie');
 const productModel = require('./product')
 
 module.exports = {
-    UsuarioModel,
+    usuarioModel,
     RoleModel,
     CategorieModel,
     productModel

@@ -34,10 +34,18 @@ const validateCategorie = async ( id ) => {
     }
 }
 
+const validCollectionFilter = (collection, collections) => {
+    if ( !collections.includes(collection) ) {
+        throw new Error(`Las colecciones permitidas son ${collections}`)
+    }
+    return true
+}
+
 
 module.exports = {
     roleValid,
     emailExiste,
     getUserForId,
-    validateCategorie
+    validateCategorie,
+    validCollectionFilter
 }

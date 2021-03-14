@@ -30,7 +30,10 @@ const productsSchema = Schema({
     available: {
         type: Boolean,
         default: true
-    }
+    },
+    img: {
+        type: String,
+    },
 })
 
 module.exports = model('Product', productsSchema);
